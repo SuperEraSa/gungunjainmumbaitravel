@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gungun Jain // Mumbai Travel Itinerary</title>
+  <!-- Google Fonts: Comfortaa & Fredoka (Friendly, rounded, fun, and warm) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&family=Fredoka:wght@400;500;600;700&family=Outfit:wght@600;800&display=swap" rel="stylesheet">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+  <!-- Ambient glowing background elements -->
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
+  <div class="glow-orb orb-3"></div>
+
+  <!-- Main Container -->
+  <div class="app-container">
+    
+    <!-- Top Header -->
+    <header class="app-header glass">
+      <div class="header-left">
+        <div class="logo">
+          <div class="logo-icon">
+            <i data-lucide="compass"></i>
+          </div>
+          <h1>MUMBAI EXPEDITION</h1>
+        </div>
+        <p class="tagline">Gungun Jain's Business Travel Itinerary</p>
+      </div>
+      <div class="header-right">
+        <div class="date-badge">
+          <i data-lucide="calendar"></i>
+          <span>June 22 - June 24, 2026</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Content Grid -->
+    <div class="dashboard-grid">
+      
+      <!-- Left Sidebar: Widgets & Profile -->
+      <aside class="sidebar-section">
+        
+        <!-- Profile Card -->
+        <div class="card profile-card glass">
+          <div class="profile-header">
+            <div class="profile-avatar">GJ</div>
+            <div class="profile-info">
+              <h3>Gungun Jain</h3>
+              <p>Business Traveller</p>
+            </div>
+          </div>
+          <div class="profile-details">
+            <div class="detail-item">
+              <span class="detail-label">Destination:</span>
+              <span class="detail-value">Mumbai, India</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Duration:</span>
+              <span class="detail-value">3 Days (2 Nights)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Airport Transfer Reminder Widget -->
+        <div class="card reminder-card glass">
+          <div class="card-header-simple">
+            <i data-lucide="bell" class="icon-red"></i>
+            <h3>Transfer Reminders</h3>
+          </div>
+          <p class="reminder-text">Book airport transfers a day earlier (June 21, 2026).</p>
+          <div class="reminder-actions">
+            <div class="reminder-toggle">
+              <input type="checkbox" id="transfer-arr-checked">
+              <label for="transfer-arr-checked">Arrival Transfer Booked</label>
+            </div>
+            <div class="reminder-toggle">
+              <input type="checkbox" id="transfer-dep-checked">
+              <label for="transfer-dep-checked">Departure Transfer Booked</label>
+            </div>
+          </div>
+          <div id="reminder-alert-banner" class="alert-banner warning">
+            <i data-lucide="alert-triangle"></i>
+            <span>Action Required: Set transfer bookings!</span>
+          </div>
+        </div>
+
+        <!-- Flight Status Widget -->
+        <div class="card flight-card glass">
+          <div class="card-header-simple">
+            <i data-lucide="plane" class="icon-gold"></i>
+            <h3>Live Flight Status</h3>
+          </div>
+          <div class="flight-list">
+            <!-- Flight 1 -->
+            <div class="flight-item" id="flight-arrival">
+              <div class="flight-route">
+                <span class="airport">IDR</span>
+                <i data-lucide="arrow-right"></i>
+                <span class="airport">BOM</span>
+                <span class="flight-status badge-on-time">Checking...</span>
+              </div>
+              <div class="flight-meta-details">
+                <span><strong>Flight:</strong> IndiGo 6E 6387</span>
+                <span><strong>Booking ID:</strong> 2022393332</span>
+                <span><strong>Airline Ref (PNR):</strong> W9T8NM</span>
+              </div>
+            </div>
+            <!-- Flight 2 -->
+            <div class="flight-item" id="flight-departure">
+              <div class="flight-route">
+                <span class="airport">BOM</span>
+                <i data-lucide="arrow-right"></i>
+                <span class="airport">IDR</span>
+                <span class="flight-status badge-on-time">Checking...</span>
+              </div>
+              <div class="flight-meta-details">
+                <span><strong>Flight:</strong> IndiGo 6E 6599</span>
+                <span><strong>Booking ID:</strong> 2022393333</span>
+                <span><strong>Airline Ref (PNR):</strong> H4MNRY</span>
+              </div>
+            </div>
+          </div>
+          <div class="flight-footer">
+            <span class="last-updated" id="flight-update-time">Last Checked: Just now</span>
+            <button class="icon-btn-small" id="refresh-flights" title="Simulate Status Check">
+              <i data-lucide="refresh-cw"></i>
+            </button>
+          </div>
+        </div>
+
+      </aside>
+
+      <!-- Main Itinerary Area -->
+      <main class="itinerary-section glass">
+        
+        <!-- Controls & Tabs -->
+        <div class="itinerary-controls">
+          <div class="tabs-container">
+            <button class="tab-btn active" data-category="all">All</button>
+            <button class="tab-btn" data-category="flight">✈️ Flights</button>
+            <button class="tab-btn" data-category="hotel">🏨 Hotels</button>
+            <button class="tab-btn" data-category="work">💼 Work</button>
+            <button class="tab-btn" data-category="leisure">🏝️ Leisure</button>
+          </div>
+          <button class="btn btn-primary" id="add-event-btn">
+            <i data-lucide="plus-circle"></i> Add Activity
+          </button>
+        </div>
+
+        <!-- Treasure Map Timeline Container -->
+        <div class="timeline-container">
+          <!-- The visual map path line (rendered behind elements) -->
+          <div class="map-path-line"></div>
+          
+          <div class="timeline-days" id="timeline-days-container">
+            <!-- Day containers populated via JavaScript -->
+          </div>
+        </div>
+
+      </main>
+
+    </div>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p>Mumbai Itinerary Dashboard &copy; 2026 // Prepared for Gungun Jain</p>
+    </footer>
+
+  </div>
+
+  <!-- Event Modal (Add / Edit Activity) -->
+  <div class="modal-overlay" id="event-modal">
+    <div class="modal-content glass">
+      <div class="modal-header">
+        <h3 id="modal-title">Add New Activity</h3>
+        <button class="close-btn" id="close-modal-btn">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <form id="event-form">
+        <input type="hidden" id="event-id">
+        <div class="form-group">
+          <label for="event-day">Trip Day</label>
+          <select id="event-day" required>
+            <option value="1">Day 1: June 22, 2026</option>
+            <option value="2">Day 2: June 23, 2026</option>
+            <option value="3">Day 3: June 24, 2026</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="event-time">Time</label>
+          <input type="time" id="event-time" required>
+        </div>
+        <div class="form-group">
+          <label for="event-title">Activity Name</label>
+          <input type="text" id="event-title" placeholder="e.g., Check-in at Westin" required>
+        </div>
+        <div class="form-group">
+          <label for="event-location">Location / Details</label>
+          <input type="text" id="event-location" placeholder="e.g., Goregaon East" required>
+        </div>
+        <div class="form-group">
+          <label for="event-category">Category</label>
+          <select id="event-category" required>
+            <option value="flight">Flight ✈️</option>
+            <option value="hotel">Hotel 🏨</option>
+            <option value="work">Work 💼</option>
+            <option value="leisure">Leisure 🏝️</option>
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="cancel-modal-btn">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="save-event-btn">Save Activity</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
