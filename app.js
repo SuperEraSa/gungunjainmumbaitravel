@@ -254,6 +254,7 @@ window.addEventListener("DOMContentLoaded", () => {
   loadData();
   setupEventListeners();
   simulateFlightStatusUpdate();
+  updateDepartureCountdown();
   lucide.createIcons();
   
   // Auto simulate updates every 2 hours (conceptually, we use 10 seconds for demo visual changes if clicked, plus interval)
@@ -656,3 +657,55 @@ document.addEventListener("click", (e) => {
     plane.remove();
   }, 900);
 });
+
+// --- 11. DEPARTURE COUNTDOWN TIMER ---
+function updateDepartureCountdown() {
+  const daysEl = document.getElementById("alarm-days");
+  const hoursEl = document.getElementById("alarm-hours");
+  const minsEl = document.getElementById("alarm-mins");
+  const secsEl = document.getElementById("alarm-secs");
+  const labelTag = document.querySelector(".alarm-label-tag");
+  const alarmWidget = document.getElementById("departure-alarm");
+
+  if (!daysEl || !hoursEl || !minsEl || !secsEl) return;
+
+  // First Flight Departure Date: June 22, 2026 at 10:10 AM
+  const departureDate = new Date("2026-06-22T10:10:00");
+  
+  function tick() {
+    const now = new Date();
+    const diff = departureDate - now;
+
+    if (diff <= 0) {
+      daysEl.textContent = "00";
+      hoursEl.textContent = "00";
+      minsEl.textContent = "00";
+      secsEl.textContent = "00";
+      
+      if (labelTag) {
+        labelTag.textContent = "Departed";
+        labelTag.style.background = "rgba(122, 158, 126, 0.15)";
+        labelTag.style.borderColor = "rgba(122, 158, 126, 0.3)";
+        labelTag.style.color = "var(--accent-cyan)";
+      }
+      
+      if (alarmWidget) {
+        alarmWidget.classList.add("expired");
+      }
+      return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+    daysEl.textContent = days.toString().padStart(2, '0');
+    hoursEl.textContent = hours.toString().padStart(2, '0');
+    minsEl.textContent = minutes.toString().padStart(2, '0');
+    secsEl.textContent = seconds.toString().padStart(2, '0');
+  }
+
+  tick();
+  setInterval(tick, 1000);
+}

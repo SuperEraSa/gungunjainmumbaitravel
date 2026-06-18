@@ -931,3 +931,271 @@ h1, h2, h3, h4 {
     transform: translate(180px, -180px) scale(0.5) rotate(-20deg);
   }
 }
+
+/* Flight Departure Countdown Widget */
+.countdown-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  margin-top: 10px;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.countdown-container i {
+  width: 14px;
+  height: 14px;
+}
+
+/* Alarm Clock Countdown Widget Styles */
+.alarm-countdown-widget {
+  position: relative;
+  width: 100%;
+  background: #0d0a07; /* Dark LED/LCD display screen */
+  border: 4px solid var(--accent-gold); /* Brass/Gold outer ring/bezel */
+  border-radius: var(--radius-lg);
+  padding: 24px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 35px 0 25px 0; /* Space for the bells at the top */
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.7),
+    inset 0 0 20px rgba(0, 0, 0, 0.95),
+    0 0 15px rgba(212, 175, 55, 0.15);
+  z-index: 10;
+  overflow: visible; /* Show bells and feet! */
+  transition: var(--transition-smooth);
+}
+
+.alarm-countdown-widget.expired {
+  border-color: var(--accent-cyan);
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.6),
+    inset 0 0 20px rgba(0, 0, 0, 0.95),
+    0 0 15px rgba(122, 158, 126, 0.15);
+}
+
+.alarm-countdown-widget.expired .digits,
+.alarm-countdown-widget.expired .time-colon {
+  color: var(--accent-cyan);
+  text-shadow: 
+    0 0 5px rgba(122, 158, 126, 0.6),
+    0 0 15px rgba(122, 158, 126, 0.3);
+}
+
+/* Alarm Bells */
+.alarm-bell {
+  position: absolute;
+  width: 55px;
+  height: 28px;
+  background: linear-gradient(135deg, #f3d078 0%, #d4af37 50%, #aa841c 100%);
+  border: 2px solid #18130e;
+  border-radius: 50px 50px 0 0;
+  top: -22px;
+  z-index: -1;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  transition: var(--transition-smooth);
+}
+
+.alarm-countdown-widget.expired .alarm-bell {
+  background: linear-gradient(135deg, #aed0b2 0%, #7a9e7e 50%, #507053 100%);
+}
+
+.alarm-left-bell {
+  left: 45px;
+  transform: rotate(-35deg);
+  transform-origin: bottom center;
+}
+
+.alarm-right-bell {
+  right: 45px;
+  transform: rotate(35deg);
+  transform-origin: bottom center;
+}
+
+/* Alarm Hammer/Handle */
+.alarm-handle {
+  position: absolute;
+  width: 32px;
+  height: 12px;
+  border: 3px solid var(--accent-gold);
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  top: -11px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: -2;
+  transition: var(--transition-smooth);
+}
+
+.alarm-countdown-widget.expired .alarm-handle {
+  border-color: var(--accent-cyan);
+}
+
+/* Alarm feet */
+.alarm-foot {
+  position: absolute;
+  width: 14px;
+  height: 18px;
+  background: linear-gradient(to bottom, #d4af37, #8b6b15);
+  border-radius: 4px;
+  bottom: -12px;
+  z-index: -1;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+  transition: var(--transition-smooth);
+}
+
+.alarm-countdown-widget.expired .alarm-foot {
+  background: linear-gradient(to bottom, #7a9e7e, #455d47);
+}
+
+.alarm-left-foot {
+  left: 60px;
+  transform: rotate(20deg);
+}
+
+.alarm-right-foot {
+  right: 60px;
+  transform: rotate(-20deg);
+}
+
+/* Icon Ring Animation */
+.alarm-icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: rgba(212, 175, 55, 0.08);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  color: var(--accent-gold);
+  transition: var(--transition-smooth);
+}
+
+.alarm-countdown-widget.expired .alarm-icon-container {
+  background: rgba(122, 158, 126, 0.08);
+  border-color: rgba(122, 158, 126, 0.2);
+  color: var(--accent-cyan);
+}
+
+.alarm-pulsing-icon {
+  width: 22px;
+  height: 22px;
+  animation: alarm-ring-shake 2.5s infinite ease-in-out;
+}
+
+@keyframes alarm-ring-shake {
+  0%, 100% { transform: rotate(0); }
+  4%, 12%, 20%, 28%, 36% { transform: rotate(-10deg); }
+  8%, 16%, 24%, 32% { transform: rotate(10deg); }
+  40% { transform: rotate(0); }
+}
+
+/* Digital Time Display */
+.alarm-time-display {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.time-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.digits {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 2.3rem;
+  color: var(--accent-red); /* Terracotta */
+  text-shadow: 
+    0 0 8px rgba(194, 122, 61, 0.6), 
+    0 0 20px rgba(194, 122, 61, 0.3);
+  letter-spacing: 1px;
+  line-height: 1;
+}
+
+.time-block .label {
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 6px;
+  letter-spacing: 1.2px;
+  font-weight: 700;
+}
+
+.time-colon {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 2.2rem;
+  color: var(--accent-red);
+  text-shadow: 
+    0 0 8px rgba(194, 122, 61, 0.6), 
+    0 0 20px rgba(194, 122, 61, 0.3);
+  animation: blink-colon 1s infinite;
+  align-self: flex-start;
+  margin-top: -2px;
+}
+
+@keyframes blink-colon {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+
+/* Label Tag */
+.alarm-label-tag {
+  background: rgba(194, 122, 61, 0.12);
+  border: 1px solid rgba(194, 122, 61, 0.25);
+  color: var(--accent-red);
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive adjustment for Mobile screens */
+@media (max-width: 650px) {
+  .alarm-countdown-widget {
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .alarm-left-bell {
+    left: 20px;
+  }
+  .alarm-right-bell {
+    right: 20px;
+  }
+  .alarm-left-foot {
+    left: 30px;
+  }
+  .alarm-right-foot {
+    right: 30px;
+  }
+  
+  .alarm-time-display {
+    gap: 8px;
+  }
+  
+  .digits {
+    font-size: 1.8rem;
+  }
+  
+  .time-colon {
+    font-size: 1.7rem;
+  }
+}
